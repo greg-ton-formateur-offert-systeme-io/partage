@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau JavaScript</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <div id="video-container">
+                    <!-- L'emplacement de la vidéo sera inséré ici -->
+                </div>
+            </td>
+            <td>
+                <button id="formation-button">Accéder à la formation</button>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        // Fonction pour extraire la valeur de "prout" de l'URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Récupérer la valeur de "prout" dans l'URL
+        const proutValue = getQueryParam('prout');
+
+        // Définir les liens de la vidéo et de la formation en fonction de la valeur de "prout"
+        let videoLink, formationLink;
+        if (proutValue === '1') {
+            videoLink = 'https://youtube.com/video1';
+            formationLink = 'https://formation.com/1';
+        } else if (proutValue === '2') {
+            videoLink = 'https://youtube.com/video2';
+            formationLink = 'https://formation.com/2';
+        } else {
+            // Valeur par défaut ou gestion des autres cas si nécessaire
+            videoLink = '#';
+            formationLink = '#';
+        }
+
+        // Créer l'élément vidéo
+        const videoElement = document.createElement('iframe');
+        videoElement.src = videoLink;
+        videoElement.width = '640';
+        videoElement.height = '360';
+        videoElement.frameborder = '0';
+        videoElement.allowfullscreen = 'true';
+
+        // Ajouter la vidéo au conteneur vidéo
+        document.getElementById('video-container').appendChild(videoElement);
+
+        // Lier le bouton à la formation
+        document.getElementById('formation-button').addEventListener('click', function() {
+            window.location.href = formationLink;
+        });
+    </script>
+</body>
+</html>
